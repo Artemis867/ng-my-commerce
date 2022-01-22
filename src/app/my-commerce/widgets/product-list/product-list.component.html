@@ -1,0 +1,44 @@
+<div class="product-list-container">
+  <div class="flex-container" *ngIf="productList$ | async as product">
+    <div class="item" *ngFor="let productData of product.data">
+      <span>{{ productData.productName }}</span>
+      <br/>
+      sizes
+      <div class="flex-container">
+        <div class="size-container">
+          XS
+          <br/>
+          {{productData.sizes.small}}
+        </div>
+        <div class="size-container">
+          S
+          <br/>
+          {{productData.sizes.small}}
+        </div>
+        <div class="size-container">
+          M
+          <br/>
+          {{productData.sizes.medium}}
+        </div>
+        <div class="size-container">
+          L
+          <br/>
+          {{productData.sizes.large}}
+        </div>
+        <div class="size-container">
+          XL
+          <br/>
+          {{productData.sizes.large}}
+        </div>
+        <div class="size-container">
+          XXL
+          <br/>
+          {{productData.sizes.large}}
+        </div>
+        <div class="shop-now-btn-container">
+          <button src=":javascript;" [routerLink]="['../','details',productData._id]">View detail</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

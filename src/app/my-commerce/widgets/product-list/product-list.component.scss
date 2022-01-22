@@ -1,0 +1,19 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .item {
+        margin: 5px;
+        padding: 5px;
+        width: 250px;
+        min-height: 250px;
+        border: 1px solid gray;
+    }
+
+    .size-container {
+        margin: 2px;
+        padding: 2px;
+        border: 1px solid gray;
+    }
+}

@@ -1,0 +1,44 @@
+@import "../../../../assets/main.scss";
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    .panel {
+        width: 50%;
+        min-height: 400px;
+        margin: 5px;
+
+        .description-container {
+            padding: 30px;
+        }
+
+        .sizes-container {
+            padding: 10px 30px 10px 30px;
+            .size-item-container {
+                display: flex;
+                flex-direction: row;
+                .selected {
+                    border: 1px solid gray;
+                }
+                .size-item {
+                    margin: 0 5px 0 5px;
+                    cursor: pointer;
+                    padding: 5px;
+                }
+
+                .size-item:hover {
+                    border-bottom: 1px solid gray;
+                }
+            }
+        }
+
+        .add-to-cart-container {
+            padding: 30px;
+            button {
+                padding: 5px 25px 5px 25px;
+                background-color: #8DCA0A;
+                color: white;
+            }
+        }
+    }
+}

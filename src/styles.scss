@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/main.scss";
+body {
+    // remove button default styling
+    button {
+        font-size: 100%;
+        font-family: inherit;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        color: black;
+    }
+}
