@@ -21,4 +21,4 @@ const MAIN_ROUTES: Routes = [
 ];
 
 
-export const myCommerceRouting = RouterModule.forRoot(MAIN_ROUTES);
+export const myCommerceRouting = RouterModule.forRoot(MAIN_ROUTES, { relativeLinkResolution: 'legacy' });
