@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { ProductDetails } from '../interface/product.interface';
+import { Observable, Subscription } from 'rxjs';
+import { ProductDetails } from './product-detail.interface';
+
 import { ProductDetailsService } from './services/product-details.service';
 
 const MSG_OUT_STOCK = 'Out of stock';
@@ -13,14 +14,15 @@ const MSG_ADD_CART = 'Add to cart';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   private product: string;
   productDetails$: Observable<ProductDetails>;
-  addBtnLabel: string;
-  btnDisable: boolean;
+  addBtnLabel: string = MSG_ADD_CART;
+  btnDisable: boolean = false;
   activeSize: string;
   private itemObj: Object;
+  subProductDetail: Subscription;
 
   @ViewChildren('sizeContainer') sizeContainer;
 
@@ -31,20 +33,14 @@ export class ProductDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.btnDisable = false;
-    this.addBtnLabel = MSG_ADD_CART;
     this.product = this.activeRoute.snapshot.paramMap.get('id');
     this.productDetails$ = this.productDetailService.getProductDetails(this.product);
+
+    this.getSizesAvailable();
   }
 
-  onHoverSize(i): void {
-    const sizeContainerElem = this.sizeContainer.toArray()[i].nativeElement;
-    let availNum = parseInt(sizeContainerElem.childNodes[0].innerText);
-  
-    if(availNum < 1) {
-      this.btnDisable = true;
-      this.addBtnLabel = MSG_OUT_STOCK;
-    }
+  ngOnDestroy() {
+    this.subProductDetail.unsubscribe();
   }
 
   onSelectSize(i, sizeName: string): void {
@@ -52,7 +48,6 @@ export class ProductDetailsComponent implements OnInit {
     this.sizeContainer.toArray().map( dom => {
       dom.nativeElement.classList.remove('selected')
     });
-
     const selected = this.sizeContainer.toArray()[i].nativeElement;
     selected.classList.add('selected');
 
@@ -85,6 +80,14 @@ export class ProductDetailsComponent implements OnInit {
       localStorage.setItem('cart',JSON.stringify(cartItems));
       console.log('updated cart');
     }
+  }
+
+  getSizesAvailable(): any {
+    // setting on subProductDetail object so it can be unsubscribed
+    this.subProductDetail = this.productDetails$.subscribe(product => {
+      return product.sizes;
+    });
+    return;
   }
 
 }
