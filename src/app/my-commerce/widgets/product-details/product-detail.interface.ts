@@ -1,7 +1,9 @@
 interface ProductDetails {
-  _id?: any;
-  productName: String;
-  sizes: Sizes;
+  data: {
+    _id?: any;
+    productName: String;
+    sizes: Sizes;
+  }
 }
 
 interface Sizes {

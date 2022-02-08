@@ -15,16 +15,30 @@
             (click)="onSelectSize(i, sizes.name)"
             #sizeContainer
             >
-              <div style="display: none;">{{ sizes.available }}</div>
               {{ sizes.name }}
           </div>
         </div>
       </div>
+      <ng-template [ngIf]="activeQuantity" [ngIfElse]="emptyContainer">
+        <div class="quantity-container">
+          <span>Quantity</span>
+          <select type="number" [(ngModel)]="selectedQuantity"
+            (change)="onSelectorQuantityChange()"
+          >
+            <option *ngFor="let qty of maxQuantity" [ngValue]="qty">{{qty}}</option>
+          </select>
+        </div>
+      </ng-template>
+      <ng-template #emptyContainer>
+        <div class="empty-container">
+        </div>
+      </ng-template>
       <div class="add-to-cart-container">
         <button (click)="doAddToCart()"
         [class.btn-disable]="btnDisable" 
-        [attr.disabled]="btnDisable? 'disabled' : null">{{ addBtnLabel }}</button>
+        [attr.disabled]="checkDisableBtn(btnDisable)">{{ addBtnLabel }}</button>
       </div>
     </div>
   </div>
 </div>
+

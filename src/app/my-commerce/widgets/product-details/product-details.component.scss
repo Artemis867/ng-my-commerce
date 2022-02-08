@@ -16,20 +16,36 @@
             padding: 10px 30px 10px 30px;
             .size-item-container {
                 display: flex;
-                flex-direction: row;
-                .selected {
-                    border: 1px solid gray;
-                }
+                flex-direction: column;
+                
                 .size-item {
+                    font-size: 14px;
                     margin: 0 5px 0 5px;
                     cursor: pointer;
                     padding: 5px;
+
+                    border-bottom: 1px solid white;
+                    &.selected {
+                        border-bottom: 1px solid gray;
+                    }
                 }
 
                 .size-item:hover {
                     border-bottom: 1px solid gray;
                 }
             }
+        }
+
+        .quantity-container {
+            padding: 10px 30px 10px 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .empty-container {
+            padding: 10px 30px 10px 30px;
+            width: 356px;
+            height: 69px;
         }
 
         .add-to-cart-container {
