@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as ProductActions from '../../state/actions/product.actions';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-shopping-cart-details',
@@ -8,10 +11,31 @@ import { Observable } from 'rxjs';
 })
 
 export class ShoppingCartDetailsComponent implements OnInit {
-
-  constructor() { }
+  
+  constructor(
+    private store: Store<any>,
+  ) { }
+  subscriptionProdList: Subscription;
+  storedProductList$: Observable<any>;
+  productDetails$: Observable<any>;
   @Input() item;
-  @Input() storedProductList;
+  
   ngOnInit() {
+    this.store.dispatch(new ProductActions.GetProducts());
+    this.storedProductList$ = this.store.select('product');
+    this.productDetails$ = this.getProductDetails();
   }
+
+  getProductDetails(): any {
+    return this.storedProductList$.pipe(
+      filter(res => res?.data),
+      map(res => this.findProductDetail(res.data)),
+    );
+  }
+
+  findProductDetail(prodDetailList: any): any {
+    return prodDetailList
+    .find(searchItem => searchItem._id == this.item.product);
+  }
+
 }

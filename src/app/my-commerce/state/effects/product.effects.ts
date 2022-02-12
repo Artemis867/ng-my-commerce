@@ -11,14 +11,13 @@ export class ProductEffects {
     constructor(
         private actions$: Actions,
         private productListService: ProductListService
-    ) {
-    }
+    ) {}
 
     loadProducts$ = createEffect(() => this.actions$.pipe(
-           ofType(ProductActions.GET_PRODUCTS),
-           mergeMap(() => this.productListService.getProducts().pipe(
+        ofType(ProductActions.GET_PRODUCTS),
+        mergeMap(() => this.productListService.getProducts().pipe(
                 map(products => ({type: ProductActions.GET_PRODUCTS_SUCCESS, payload: products})),
                 catchError(() => EMPTY)  
-           ))
-       ));
+        ))
+    ));
 }

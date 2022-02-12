@@ -5,6 +5,7 @@ export const GET_PRODUCTS_SUCCESS = '[GET PRODUCTS SUCCESS]';
 export const GET_PRODUCTS_FAILED = '[GET PRODUCTS FAIL]';
 
 export class GetProducts implements Action {
+    
     readonly type = GET_PRODUCTS;
     constructor() {}
 }

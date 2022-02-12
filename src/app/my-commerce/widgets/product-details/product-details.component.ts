@@ -85,7 +85,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       console.log('initial cart product added');
     } else {
       var cartItems = JSON.parse(localStorage.getItem('cart'));
-      cartItems.push({product: this.product, size: this.activeSize});
+      cartItems.push({product: this.product, size: this.activeSize, quantity: this.selectedQuantity});
       localStorage.setItem('cart', JSON.stringify(cartItems));
       console.log('updated cart');
     }

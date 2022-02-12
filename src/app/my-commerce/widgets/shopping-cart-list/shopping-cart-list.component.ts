@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import * as ProductActions from '../../state/actions/product.actions';
 import { ShoppingCartInterface } from './shopping-cart.interface';
 @Component({
   selector: 'app-shopping-cart-list',
@@ -10,20 +8,9 @@ import { ShoppingCartInterface } from './shopping-cart.interface';
 })
 
 export class ShoppingCartListComponent implements OnInit {
-  itemList$: Observable<ShoppingCartInterface[]>;
-  storedProductList$: Observable<any>;
-  constructor(
-    private store: Store<any>
-  ) { }
-
+  orderedItems$: Observable<ShoppingCartInterface[]>;
+  constructor() { }
   ngOnInit() {
-    this.store.dispatch(new ProductActions.GetProducts());
-    this.storedProductList$ = this.store.select('product');
-    this.itemList$ = of(this.getLocalStorageItemList());
+    this.orderedItems$ = of(JSON.parse(localStorage.getItem('cart')));
   }
-
-  getLocalStorageItemList() {
-    return JSON.parse(localStorage.getItem('cart'));
-  }
-
 }
