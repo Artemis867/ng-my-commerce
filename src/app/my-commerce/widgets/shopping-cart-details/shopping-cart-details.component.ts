@@ -3,6 +3,8 @@ import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as ProductActions from '../../state/actions/product.actions';
 import { filter, map } from 'rxjs/operators';
+import { ProductDetails } from '../interface/product.interface';
+import { StoredProductList } from './shopping-cart.interface';
 
 @Component({
   selector: 'app-shopping-cart-details',
@@ -17,9 +19,9 @@ export class ShoppingCartDetailsComponent implements OnInit {
   ) { }
   subscriptionProdList: Subscription;
   storedProductList$: Observable<any>;
-  productDetails$: Observable<any>;
+  productDetails$: Observable<ProductDetails>;
   @Input() item;
-  
+
   ngOnInit() {
     this.store.dispatch(new ProductActions.GetProducts());
     this.storedProductList$ = this.store.select('product');

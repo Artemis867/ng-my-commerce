@@ -23,6 +23,7 @@ import { GetProductPipe } from './shared/custom-pipes/get-product.pipe';
 import { ShoppingCartDetailsComponent } from './widgets/shopping-cart-details/shopping-cart-details.component';
 import { PersonComponent } from './widgets/person/person.component';
 import { FormsModule } from '@angular/forms';
+import { OverlayComponent } from './widgets/shopping-cart-list/overlay/overlay.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { FormsModule } from '@angular/forms';
     GetProductPipe,
     ShoppingCartDetailsComponent,
     PersonComponent,
+    OverlayComponent,
   ],
   imports: [
     CommonModule,

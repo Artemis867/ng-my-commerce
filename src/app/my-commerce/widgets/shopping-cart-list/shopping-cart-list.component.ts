@@ -9,8 +9,13 @@ import { ShoppingCartInterface } from './shopping-cart.interface';
 
 export class ShoppingCartListComponent implements OnInit {
   orderedItems$: Observable<ShoppingCartInterface[]>;
+  overlay: boolean = false;
   constructor() { }
   ngOnInit() {
     this.orderedItems$ = of(JSON.parse(localStorage.getItem('cart')));
+  }
+
+  onSelectCartItem(product: string): void {
+    this.overlay = this.overlay? false : true;
   }
 }
