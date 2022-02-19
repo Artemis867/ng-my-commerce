@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { OverlayComponent } from './overlay/overlay.component';
 import { ShoppingCartInterface } from './shopping-cart.interface';
 @Component({
   selector: 'app-shopping-cart-list',
@@ -8,6 +9,8 @@ import { ShoppingCartInterface } from './shopping-cart.interface';
 })
 
 export class ShoppingCartListComponent implements OnInit {
+  @ViewChildren(OverlayComponent) overlayComp: QueryList<OverlayComponent>;
+
   orderedItems$: Observable<ShoppingCartInterface[]>;
   overlay: boolean = false;
   constructor() { }
@@ -15,7 +18,9 @@ export class ShoppingCartListComponent implements OnInit {
     this.orderedItems$ = of(JSON.parse(localStorage.getItem('cart')));
   }
 
-  onSelectCartItem(product: string): void {
+  onSelectCartItem(product: string, idx): void {
+    const searchComp = this.overlayComp.find((e, i) => i == idx);
     this.overlay = this.overlay? false : true;
+    searchComp.show = this.overlay;
   }
 }

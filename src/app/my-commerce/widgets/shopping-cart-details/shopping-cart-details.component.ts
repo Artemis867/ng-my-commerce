@@ -28,7 +28,7 @@ export class ShoppingCartDetailsComponent implements OnInit {
     this.productDetails$ = this.getProductDetails();
   }
 
-  getProductDetails(): any {
+  getProductDetails(): Observable<ProductDetails> {
     return this.storedProductList$.pipe(
       filter(res => res?.data),
       map(res => this.findProductDetail(res.data)),

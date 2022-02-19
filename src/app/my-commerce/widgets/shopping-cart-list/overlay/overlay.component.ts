@@ -6,15 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./overlay.component.scss']
 })
 export class OverlayComponent implements OnInit {
-
-  @Input() show: boolean;
+  show: boolean = false;
   constructor() { }
-
-  ngOnInit(): void {
-    console.log('show overlay: ');
-    console.log(this.show);
-  }
-
+  ngOnInit(): void {}
   showOverlay(): string {
     const overlay = this.show ? 'show' : 'hide';
     return overlay;

@@ -1,4 +1,10 @@
-div {
+div.overlay-container {
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  height: 300px;
+  width: 100%;
+  background-color: rgba($color: #000000, $alpha: .095);
   &.show {
     display: block;
   }
