@@ -1,21 +1,31 @@
-<div class="product-detail-container"
-*ngIf="productDetails$ | async as productDetails">
-  <div>
-    <div class="product-img-preview">
-      <div class="img-container">
-        
+<div
+(click)="onSelectCartItem()"
+>
+  <app-overlay 
+    [show] = "show"
+    [idx] = "indx"
+    [product] = "item.product"
+    (emitRemoveCartItem) = "removeCartItem($event)"
+  ></app-overlay>
+  <div class="product-detail-container"
+  *ngIf="productDetails$ | async as productDetails">
+    <div>
+      <div class="product-img-preview">
+        <div class="img-container">
+          
+        </div>
+      </div>
+      <div class="detail-container">
+        <div class="product-name">
+          {{ productDetails.productName }}
+        </div>
+        <div class="product-size">
+          <span>{{ item.size }}</span>
+        </div>
       </div>
     </div>
-    <div class="detail-container">
-      <div class="product-name">
-        {{ productDetails.productName }}
-      </div>
-      <div class="product-size">
-        <span>{{ item.size }}</span>
-      </div>
+    <div class="product-quantity-container">
+      <span class="quantity">x{{ item.quantity }}</span>
     </div>
-  </div>
-  <div class="product-quantity-container">
-    <span class="quantity">x{{ item.quantity }}</span>
   </div>
 </div>

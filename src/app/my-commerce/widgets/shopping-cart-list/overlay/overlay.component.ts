@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-overlay',
@@ -6,7 +6,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./overlay.component.scss']
 })
 export class OverlayComponent implements OnInit {
-  show: boolean = false;
+  @Input() show: boolean = false;
+  @Input() idx: number;
+  @Input() product: string;
+
+  @Output() emitRemoveCartItem: EventEmitter<string> = new EventEmitter();
   constructor() { }
   ngOnInit(): void {}
   showOverlay(): string {
@@ -14,4 +18,11 @@ export class OverlayComponent implements OnInit {
     return overlay;
   }
 
+  onRemoveCartItem(product: string): void {
+    // localStorage.setItem(
+    //   'cart', 
+    //   JSON.stringify(cartItems.filter(item => item.product !== product))
+    // );
+    this.emitRemoveCartItem.emit(product);
+  }
 }

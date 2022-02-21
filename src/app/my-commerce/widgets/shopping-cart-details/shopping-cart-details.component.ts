@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as ProductActions from '../../state/actions/product.actions';
@@ -21,6 +21,10 @@ export class ShoppingCartDetailsComponent implements OnInit {
   storedProductList$: Observable<any>;
   productDetails$: Observable<ProductDetails>;
   @Input() item;
+  @Input() indx;
+
+  @Output() emitRemoveItemCart: EventEmitter<string> = new EventEmitter()
+  show: boolean = false;
 
   ngOnInit() {
     this.store.dispatch(new ProductActions.GetProducts());
@@ -38,6 +42,14 @@ export class ShoppingCartDetailsComponent implements OnInit {
   findProductDetail(prodDetailList: any): any {
     return prodDetailList
     .find(searchItem => searchItem._id == this.item.product);
+  }
+
+  onSelectCartItem(): void {
+    this.show = this.show ? false : true;
+  }
+
+  removeCartItem(product: string): void {
+    this.emitRemoveItemCart.emit(product);
   }
 
 }

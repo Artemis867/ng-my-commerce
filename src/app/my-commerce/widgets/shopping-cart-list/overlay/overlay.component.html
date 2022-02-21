@@ -1,5 +1,7 @@
 <div
   class="overlay-container"
   [ngClass]="showOverlay()">
-overlay works!
+  <div class="remove-btn-container">
+    <span (click)="onRemoveCartItem(product)">remove</span>
+  </div>
 </div>

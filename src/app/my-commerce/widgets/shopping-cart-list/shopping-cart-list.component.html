@@ -1,11 +1,11 @@
 <div class="cart-list-container">
-  <div class="cart-list" *ngIf="orderedItems$ | async as orderedItems">
-    <div class="cart-item" *ngFor="let items of orderedItems;let i = index"
-    (click)="onSelectCartItem(items.product, i)">
-        <app-shopping-cart-details 
-          [item]="items">
-        </app-shopping-cart-details>
-        <app-overlay></app-overlay>
+  <div class="cart-list">
+    <div class="cart-item" *ngFor="let items of orderedItems;let i = index">
+      <app-shopping-cart-details 
+        [item]="items"
+        [indx]="i"
+        (emitRemoveItemCart) = "removeCartItem($event)">
+      </app-shopping-cart-details>
     </div>
   </div>
 </div>

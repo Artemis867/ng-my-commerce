@@ -61,8 +61,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       this.activeQuantity = false;
       this.disableBtnState(true, MSG_OUT_STOCK);
     } else {
-      this.disableBtnState(false);
       this.activeQuantity = true;
+      this.disableBtnState(false);
     }
   }
 
