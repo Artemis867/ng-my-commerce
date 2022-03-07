@@ -56,7 +56,8 @@ import { HttpLink } from 'apollo-angular/http';
     EffectsModule.forRoot([ProductEffects]),
     NgbModule,
     FormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ApolloModule,
   ],
   exports: [
     MyCommerceComponent

@@ -1,6 +1,6 @@
 <div class="product-list-container">
   <div class="flex-container" *ngIf="productList$ | async as product">
-    <div class="item" *ngFor="let productData of product.data">
+    <div class="item" *ngFor="let productData of product">
       <span>{{ productData.productName }}</span>
       <br/>
       sizes
