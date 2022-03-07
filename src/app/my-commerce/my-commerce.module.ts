@@ -24,6 +24,9 @@ import { ShoppingCartDetailsComponent } from './widgets/shopping-cart-details/sh
 import { PersonComponent } from './widgets/person/person.component';
 import { FormsModule } from '@angular/forms';
 import { OverlayComponent } from './widgets/shopping-cart-list/overlay/overlay.component';
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+import { InMemoryCache } from '@apollo/client/core';
+import { HttpLink } from 'apollo-angular/http'; 
 
 @NgModule({
   declarations: [
@@ -57,6 +60,20 @@ import { OverlayComponent } from './widgets/shopping-cart-list/overlay/overlay.c
   ],
   exports: [
     MyCommerceComponent
+  ],
+  providers: [
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: (httpLink: HttpLink) => {
+        return {
+          cache: new InMemoryCache(),
+          link: httpLink.create({
+            uri: `http://localhost:4000/graphql`
+          }),
+        }
+      },
+      deps: [HttpLink],
+    }
   ]
 })
 export class MyCommerceModule { }
