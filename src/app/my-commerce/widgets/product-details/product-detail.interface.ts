@@ -12,4 +12,8 @@ interface Sizes {
   M: number;
 }
 
-export { ProductDetails };
+interface ProductListGQL {
+  getProductList: ProductDetails[]
+}
+
+export { ProductDetails, ProductListGQL };

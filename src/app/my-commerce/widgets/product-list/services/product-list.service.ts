@@ -1,21 +1,29 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { ProductDetails } from '../../interface/product.interface';
-
+import { GET_PRODUCTS } from 'src/app/my-commerce/query/graphql';
+import { Apollo } from 'apollo-angular';
+import { map } from 'rxjs/operators';
+import { ProductDetails, ProductListGQL } from '../../product-details/product-detail.interface';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductListService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private apollo: Apollo,
   ) { }
 
   headers = new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'});
 
-  getProducts(): Observable<ProductDetails[]> {
-    return this.http.get<ProductDetails[]>(`http://localhost:3000/products/all`);
+  getProducts(): any {
+    return this.apollo.watchQuery<ProductListGQL>({
+      query: GET_PRODUCTS
+    })
+    .valueChanges
+      .pipe(
+        map(({data, loading}) => data.getProductList)
+      );
   }
   
 }
