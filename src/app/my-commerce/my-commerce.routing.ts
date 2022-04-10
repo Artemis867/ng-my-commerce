@@ -10,8 +10,12 @@ import { ProductListComponent } from "./widgets/product-list/product-list.compon
 
 
 const MAIN_ROUTES: Routes = [
-    {path: '', redirectTo: '/shop/list', pathMatch: 'full'},
-    {path: 'shop', component: ProductsComponent,
+    {
+        path: '', redirectTo: '/shop/list',
+        pathMatch: 'full'
+    },
+    {
+        path: 'shop', component: ProductsComponent,
         children: [
             {path: 'list', component: ProductListComponent},
             {path: 'details/:id', component: ProductDetailsComponent},

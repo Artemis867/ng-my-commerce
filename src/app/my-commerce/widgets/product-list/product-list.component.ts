@@ -1,24 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ProductDetails } from '../interface/product.interface';
 import { ProductListService } from './services/product-list.service';
-import { Apollo, gql } from 'apollo-angular';
-
-const GET_PRODUCTS = gql`
-  query Query {
-    getProductList {
-      _id,
-      productName,
-      sizes {
-        S,
-        M,
-        L,
-        XL
-      },
-      description
-    } 
-  }
-`;
 
 @Component({
   selector: 'app-product-list',
@@ -27,8 +11,8 @@ const GET_PRODUCTS = gql`
 })
 export class ProductListComponent implements OnInit {
 
-  testProductList$: Observable<any>;
   productList$: Observable<ProductDetails[]>;
+  destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(
     private productListService: ProductListService,
   ) { }
@@ -36,4 +20,24 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {
     this.productList$ = this.productListService.getProducts();
   }
+
+  /**
+   * comment out if you need to use subscribe inside the component
+   */
+  // ngOnDestroy() {
+  //   this.destroy$.next(true);
+  //   this.destroy$.unsubscribe();
+  // }
+
+
+  /**
+   * method use in case you need to use subscribe
+   * inside the component
+   */
+  // getProductList(): Observable<ProductDetails[]> {
+  //   return this.productListService.getProducts()
+  //   .pipe(
+  //     takeUntil(this.destroy$)
+  //   );
+  // }
 }
