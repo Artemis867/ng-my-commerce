@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { maxQuantity } from './max-quantity.mock';
 import { ProductDetails } from './product-detail.interface';
@@ -35,7 +34,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private activeRoute: ActivatedRoute,
     private productDetailService: ProductDetailsService,
-    private store: Store<any>
   ) { }
 
   ngOnInit() {

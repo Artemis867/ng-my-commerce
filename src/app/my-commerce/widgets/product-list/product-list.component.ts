@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+// import { takeUntil } from 'rxjs/operators';
 import { ProductDetails } from '../interface/product.interface';
 import { ProductListService } from './services/product-list.service';
 
@@ -19,6 +19,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.productList$ = this.productListService.getProducts();
+    // this.productListService.simpleMethod();
   }
 
   /**

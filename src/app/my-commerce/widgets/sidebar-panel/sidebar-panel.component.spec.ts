@@ -1,4 +1,6 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { myCommerceRouting } from '../../my-commerce.routing';
 
 import { SidebarPanelComponent } from './sidebar-panel.component';
 
@@ -8,7 +10,16 @@ describe('SidebarPanelComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SidebarPanelComponent ]
+      declarations: [ SidebarPanelComponent ],
+      imports: [
+        myCommerceRouting
+      ],
+      providers: [
+        {
+          provide: APP_BASE_HREF,
+          useValue: '/'
+        }
+      ]
     })
     .compileComponents();
   }));

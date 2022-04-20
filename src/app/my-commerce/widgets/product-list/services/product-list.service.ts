@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GET_PRODUCTS } from 'src/app/my-commerce/query/graphql';
+import { GET_PRODUCTS } from '../../../query/graphql';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { ProductListGQL } from '../../product-details/product-detail.interface';
@@ -21,5 +21,10 @@ export class ProductListService {
       .pipe(
         map(({data, loading}) => data.getProductList)
       );
+  }
+
+  simpleMethod(): boolean {
+    console.log('just a simple method');
+    return true;
   }
 }

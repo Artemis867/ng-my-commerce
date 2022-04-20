@@ -25,6 +25,8 @@ module.exports = {
 
   testMatch: [
     '<rootDir>/src/app/*.spec.ts',
-    '<rootDir>/src/app/**/*.spec.ts'
+    '<rootDir>/src/app/**/*.spec.ts',
+    '<rootDir>/src/app/my-commerce/widgets/**/*.spec.ts',
+    '<rootDir>/src/app/my-commerce/widgets/product-list/*.spec.ts',
   ]
 };

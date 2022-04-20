@@ -20,7 +20,9 @@ export class ShoppingCartDetailsComponent implements OnInit {
   subscriptionProdList: Subscription;
   storedProductList$: Observable<any>;
   productDetails$: Observable<ProductDetails>;
-  @Input() item;
+  @Input() item = {
+    product: 1231423433
+  };
   @Input() indx;
 
   @Output() emitRemoveItemCart: EventEmitter<string> = new EventEmitter()

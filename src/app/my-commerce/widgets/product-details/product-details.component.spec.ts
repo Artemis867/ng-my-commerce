@@ -1,28 +1,27 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Store, StoreModule } from '@ngrx/store';
+import { RouterModule } from '@angular/router';
 
 import { ProductDetailsComponent } from './product-details.component';
 
 describe('ProductDetailsComponent', () => {
   let component: ProductDetailsComponent;
   let fixture: ComponentFixture<ProductDetailsComponent>;
-  beforeEach(waitForAsync(() => {
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ 
         ProductDetailsComponent,
       ],
       imports: [
-        StoreModule,
         HttpClientModule,
         RouterModule.forRoot([])
-      ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
+      ],
+      providers: [
+        {provide: APP_BASE_HREF, useValue: '/'}
+      ],
+    });
     fixture = TestBed.createComponent(ProductDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

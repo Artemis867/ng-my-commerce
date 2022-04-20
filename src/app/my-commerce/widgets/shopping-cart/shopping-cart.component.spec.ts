@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ModalModule, BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { ShoppingCartComponent } from './shopping-cart.component';
 
@@ -6,14 +7,19 @@ describe('ShoppingCartComponent', () => {
   let component: ShoppingCartComponent;
   let fixture: ComponentFixture<ShoppingCartComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ShoppingCartComponent ]
-    })
-    .compileComponents();
-  }));
-
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [ ShoppingCartComponent ],
+      imports: [],
+      providers: [
+        {
+          provide: BsModalService,
+          useValue: ''
+        },
+        {provide: BsModalRef}
+      ],
+    });
+
     fixture = TestBed.createComponent(ShoppingCartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

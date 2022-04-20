@@ -8,7 +8,12 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "test:product-list": "ng test --testMatch=\"<rootDir>/src/app/my-commerce/widgets/product-list/*.spec.ts\"",
+    "test:product-details": "ng test --testMatch=\"<rootDir>/src/app/my-commerce/widgets/product-details/*.spec.ts\"",
+    "test:sidebar-panel": "ng test --testMatch=\"<rootDir>/src/app/my-commerce/widgets/sidebar-panel/*.spec.ts\"",
+    "test:widgets": "ng test --testMatch=\"<rootDir>/src/app/my-commerce/widgets/**/*.spec.ts\"",
+    "test:all": "npm test"
   },
   "private": true,
   "dependencies": {
