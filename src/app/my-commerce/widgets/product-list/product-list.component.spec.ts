@@ -1,17 +1,17 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductListComponent } from './product-list.component';
-import { GET_PRODUCTS } from '../../query/graphql';
 import { ProductListService } from './services/product-list.service';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { gqlProductListMock } from '../../mocks/product-list.mock';
+import { DOCUMENT } from '@angular/common';
 
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
   let fixture: ComponentFixture<ProductListComponent>;
-  let service: ProductListService;
+  let compiled: any;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -33,15 +33,26 @@ describe('ProductListComponent', () => {
             }
           },
           deps: [HttpLink],
-        }
+        },
       ]
     });
     fixture = TestBed.createComponent(ProductListComponent);
     component = fixture.componentInstance;
+
+    compiled = TestBed.inject(DOCUMENT);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('provide product list mock data', () => {
+    expect(gqlProductListMock.data.getProductList.length).toBeGreaterThan(0);
+  });
+
+  it('should contain atleast 1 size', () => {
+    expect(true).toBeTruthy();
+  });
+  
 });

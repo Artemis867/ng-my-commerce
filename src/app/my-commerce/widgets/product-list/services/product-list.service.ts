@@ -23,8 +23,7 @@ export class ProductListService {
       );
   }
 
-  simpleMethod(): boolean {
-    console.log('just a simple method');
-    return true;
+  checkService(): boolean {
+    return true;    
   }
 }
