@@ -3,15 +3,15 @@
     <div class="panel panel-img">image</div>
     <div class="panel">
       <div class="description-container">
-        <h2>{{ productDetails.data.productName }}</h2>
-        {{ productDetails.data.description }}
+        <h2>{{ productDetails.productName }}</h2>
+        {{ productDetails.description }}
       </div>
       <div class="sizes-container">
         <span>Size available</span>
         <div class="size-item-container">
           <div 
             class="size-item" 
-            *ngFor="let sizes of productDetails.data.sizes | toArray; let i = index"
+            *ngFor="let sizes of productDetails.sizes | toArray; let i = index"
             (click)="onSelectSize(i, sizes.name)"
             #sizeContainer
             >
@@ -41,4 +41,3 @@
     </div>
   </div>
 </div>
-

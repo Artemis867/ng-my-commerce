@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { maxQuantity } from './max-quantity.mock';
 import { ProductDetails } from './product-detail.interface';
 
@@ -18,60 +20,78 @@ const MSG_INVALID_QTY = 'Invalid Quantity Provided';
 export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   private product: string;
-  productDetails$: Observable<ProductDetails>;
+  productDetails$: Observable<any>;
+  productDetailsApollo$: Observable<any>;
   addBtnLabel: string = MSG_ADD_CART;
   btnDisable: boolean = false;
   activeSize: string;
   private itemObj: Object;
   subProductDetail: Subscription;
-  sizes: any;
+  sizes$: Observable<any>;
   maxQuantity: Array<number> = maxQuantity;
   selectedQuantity: any;
+  selectedAvailQuantity: any = 0;
   activeQuantity: boolean = false;
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  storeObs$: Observable<any>;
 
   @ViewChildren('sizeContainer') sizeContainer;
 
   constructor(
     private activeRoute: ActivatedRoute,
     private productDetailService: ProductDetailsService,
+    private store: Store,
   ) { }
 
   ngOnInit() {
     this.product = this.activeRoute.snapshot.paramMap.get('id');
-    this.productDetails$ = this.productDetailService.getProductDetails(this.product);
-
-    this.subProductDetail = this.productDetails$
-    .subscribe(product => {
-      this.sizes =  product.data.sizes;
-    });
+    this.productDetails$ = this.productDetailService.getProductDetailsApollo(this.product);
+    this.sizes$ = this.getSizeProduct();
+    this.getSizeProduct();
   }
 
   ngOnDestroy() {
-    this.subProductDetail.unsubscribe();
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
+  getSizeProduct(): Observable<any> {
+    return this.productDetails$.pipe(map(res => res.sizes));
   }
 
   onSelectSize(i, sizeName: string): void {
     this.selectedQuantity = null;
     this.activeSize = sizeName;
     this.updateSetProduct(i);
-    if(this.sizes[sizeName] < 1) {
-      this.activeQuantity = false;
-      this.disableBtnState(true, MSG_OUT_STOCK);
-    } else {
+
+    this.sizes$.pipe(
+      takeUntil(this.destroy$)
+    )
+    .subscribe(size => {
+      console.log('size data: ', size[sizeName]);
+      if(size[sizeName] > 0) {
+        this.activeQuantity = true;
+        this.disableBtnState(false);
+        this.selectedAvailQuantity = size[sizeName];
+        return;
+      }
+
       this.activeQuantity = true;
-      this.disableBtnState(false);
-    }
+      this.disableBtnState(true, MSG_OUT_STOCK);
+    });
   }
 
   onSelectorQuantityChange(): void {
-    if (this.sizes[this.activeSize] < this.selectedQuantity) {
+    if (this.selectedAvailQuantity < this.selectedQuantity) {
       this.disableBtnState(true, MSG_INVALID_QTY);
-    } else {
-      this.disableBtnState(false);
-    }
+      return;
+    } 
+    this.disableBtnState(false);
   }
 
   doAddToCart(): void {
+    console.log('add to cart');
+    return;
     if(localStorage.getItem('cart') === null) {
       this.itemObj = [{
         product: this.product,

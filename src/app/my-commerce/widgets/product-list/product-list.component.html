@@ -3,7 +3,9 @@
     <div class="item" *ngFor="let productData of product">
       <span>{{ productData.productName }}</span>
       <div class="size-container">
-        <div>S</div>
+        <div>
+          <ng-container *ngTemplateOutlet="sizeTemplate; context: {$implicit: productData.sizes}"></ng-container>
+        </div>
       </div>
       <div class="flex-container">
         <div class="item-detail-container">
@@ -18,3 +20,12 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #sizeTemplate let-sizes>
+  <div *ngIf="sizes.XS >= 1">XS</div>
+  <div *ngIf="sizes.S >= 1">S</div>
+  <div *ngIf="sizes.M >= 1">M</div>
+  <div *ngIf="sizes.L">L</div>
+  <div *ngIf="sizes.XL">XL</div>
+</ng-template>

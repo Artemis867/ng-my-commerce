@@ -20,18 +20,19 @@
                 
                 .size-item {
                     font-size: 14px;
-                    margin: 0 5px 0 5px;
+                    margin: 0 5px 0 0px;
                     cursor: pointer;
                     padding: 5px;
 
                     border-bottom: 1px solid white;
+                    border-left: 4px solid white;
                     &.selected {
-                        border-bottom: 1px solid gray;
+                        border-bottom: 1px solid #87b03c;
                     }
                 }
 
                 .size-item:hover {
-                    border-bottom: 1px solid gray;
+                    border-bottom: 1px solid #cdcdcd;
                 }
             }
         }
@@ -39,12 +40,13 @@
         .quantity-container {
             padding: 10px 30px 10px 30px;
             display: flex;
+            height: 69px;
             flex-direction: column;
         }
 
         .empty-container {
             padding: 10px 30px 10px 30px;
-            width: 356px;
+            width: 336px;
             height: 69px;
         }
 

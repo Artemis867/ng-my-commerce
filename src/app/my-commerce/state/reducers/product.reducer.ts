@@ -13,5 +13,8 @@ export function ProductReducer(state, action: Action) {
         case ProductActions.GET_PRODUCTS_FAILED:
             return {...state};
         break;
+        case ProductActions.ADD_TO_CART:
+            return {...state};
+        break;
     }
 }

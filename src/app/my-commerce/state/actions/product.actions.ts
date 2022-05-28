@@ -1,11 +1,11 @@
 import { Action } from '@ngrx/store';
 
 export const GET_PRODUCTS = '[GET PRODUCTS]';
+export const ADD_TO_CART = '[ADD TO CART]';
 export const GET_PRODUCTS_SUCCESS = '[GET PRODUCTS SUCCESS]';
 export const GET_PRODUCTS_FAILED = '[GET PRODUCTS FAIL]';
 
 export class GetProducts implements Action {
-    
     readonly type = GET_PRODUCTS;
     constructor() {}
 }
@@ -20,4 +20,10 @@ export class GetProductsFailed implements Action {
     constructor(public payload: any) {}
 }
 
-export type All = GetProducts | GetProductsSuccess | GetProductsFailed;
+export class AddToCartProduct implements Action {
+    readonly type = ADD_TO_CART;
+    constructor(public payload: any) {}
+}
+
+export type All = GetProducts | GetProductsSuccess | GetProductsFailed
+| AddToCartProduct;
