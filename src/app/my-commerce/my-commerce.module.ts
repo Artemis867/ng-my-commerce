@@ -21,7 +21,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProductEffects } from './state/effects/product.effects';
 import { GetProductPipe } from './shared/custom-pipes/get-product.pipe';
 import { ShoppingCartDetailsComponent } from './widgets/shopping-cart-details/shopping-cart-details.component';
-import { PersonComponent } from './widgets/person/person.component';
 import { FormsModule } from '@angular/forms';
 import { OverlayComponent } from './widgets/shopping-cart-list/overlay/overlay.component';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
@@ -43,7 +42,6 @@ import { HttpLink } from 'apollo-angular/http';
     ShoppingCartListComponent,
     GetProductPipe,
     ShoppingCartDetailsComponent,
-    PersonComponent,
     OverlayComponent,
   ],
   imports: [

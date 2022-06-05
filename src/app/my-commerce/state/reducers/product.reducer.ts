@@ -2,10 +2,12 @@ import * as ProductActions from '../actions/product.actions';
 
 export type Action = ProductActions.All;
 
-export function ProductReducer(state, action: Action) {
+const initialState = [];
+
+export function ProductReducer(state = initialState, action: Action) {
     switch(action.type) {
         case ProductActions.GET_PRODUCTS:
-            return {...state};
+            return [...state];
         break;
         case ProductActions.GET_PRODUCTS_SUCCESS:
             return action.payload;
@@ -14,7 +16,7 @@ export function ProductReducer(state, action: Action) {
             return {...state};
         break;
         case ProductActions.ADD_TO_CART:
-            return {...state};
+            return [...state, action.payload];
         break;
     }
 }

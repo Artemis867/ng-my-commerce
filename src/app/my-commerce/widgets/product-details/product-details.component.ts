@@ -5,6 +5,7 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { maxQuantity } from './max-quantity.mock';
 import { ProductDetails } from './product-detail.interface';
+import * as ProductActions from '../../state/actions/product.actions';
 
 import { ProductDetailsService } from './services/product-details.service';
 
@@ -40,7 +41,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private activeRoute: ActivatedRoute,
     private productDetailService: ProductDetailsService,
-    private store: Store,
+    private store: Store<any>,
   ) { }
 
   ngOnInit() {
@@ -76,7 +77,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         return;
       }
 
-      this.activeQuantity = true;
+      this.activeQuantity = false;
       this.disableBtnState(true, MSG_OUT_STOCK);
     });
   }
@@ -90,22 +91,19 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   }
 
   doAddToCart(): void {
-    console.log('add to cart');
-    return;
-    if(localStorage.getItem('cart') === null) {
-      this.itemObj = [{
+    this.productDetails$.pipe(
+      takeUntil(this.destroy$)
+    )
+    .subscribe(({productName}) => {
+      const productData = {
         product: this.product,
+        productName: productName,
         size: this.activeSize,
         quantity: this.selectedQuantity,
-      }]; 
-      localStorage.setItem('cart', JSON.stringify(this.itemObj));
-      console.log('initial cart product added');
-    } else {
-      var cartItems = JSON.parse(localStorage.getItem('cart'));
-      cartItems.push({product: this.product, size: this.activeSize, quantity: this.selectedQuantity});
-      localStorage.setItem('cart', JSON.stringify(cartItems));
-      console.log('updated cart');
-    }
+      }
+      console.info('[product added]');
+      this.store.dispatch(new ProductActions.AddToCartProduct(productData));
+    });
   }
 
   updateSetProduct(i): void {

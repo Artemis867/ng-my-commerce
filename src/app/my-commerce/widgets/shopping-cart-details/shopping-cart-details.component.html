@@ -4,11 +4,10 @@
   <app-overlay 
     [show] = "show"
     [idx] = "indx"
-    [product] = "item.product"
+    [product] = "productDetails.product"
     (emitRemoveCartItem) = "removeCartItem($event)"
   ></app-overlay>
-  <div class="product-detail-container"
-  *ngIf="productDetails$ | async as productDetails">
+  <div class="product-detail-container">
     <div>
       <div class="product-img-preview">
         <div class="img-container">
@@ -20,12 +19,12 @@
           {{ productDetails.productName }}
         </div>
         <div class="product-size">
-          <span>{{ item.size }}</span>
+          <span>{{ productDetails.size }}</span>
         </div>
       </div>
     </div>
     <div class="product-quantity-container">
-      <span class="quantity">x{{ item.quantity }}</span>
+      <span class="quantity">x{{ productDetails.quantity }}</span>
     </div>
   </div>
 </div>

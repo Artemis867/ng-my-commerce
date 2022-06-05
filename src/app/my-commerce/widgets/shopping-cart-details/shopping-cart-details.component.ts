@@ -19,26 +19,16 @@ export class ShoppingCartDetailsComponent implements OnInit {
   ) { }
   subscriptionProdList: Subscription;
   storedProductList$: Observable<any>;
-  productDetails$: Observable<ProductDetails>;
-  @Input() item = {
-    product: 1231423433
-  };
+  productDetails: any;
+  @Input() item;
   @Input() indx;
 
   @Output() emitRemoveItemCart: EventEmitter<string> = new EventEmitter()
   show: boolean = false;
 
   ngOnInit() {
-    this.store.dispatch(new ProductActions.GetProducts());
-    this.storedProductList$ = this.store.select('product');
-    this.productDetails$ = this.getProductDetails();
-  }
-
-  getProductDetails(): Observable<ProductDetails> {
-    return this.storedProductList$.pipe(
-      filter(res => res?.data),
-      map(res => this.findProductDetail(res.data)),
-    );
+    console.log('item data: ', this.item);
+    this.productDetails = this.item;
   }
 
   findProductDetail(prodDetailList: any): any {

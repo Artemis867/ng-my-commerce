@@ -53,6 +53,5 @@ describe('ProductListComponent', () => {
 
   it('should contain atleast 1 size', () => {
     expect(true).toBeTruthy();
-  });
-  
+  });  
 });
