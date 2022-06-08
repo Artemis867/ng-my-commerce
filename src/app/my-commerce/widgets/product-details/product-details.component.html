@@ -1,6 +1,8 @@
 <div class="container" *ngIf="productDetails$ | async as productDetails">
   <div class="flex-container">
-    <div class="panel panel-img">image</div>
+    <div class="panel panel-img">
+      <img src="/assets/images/stock/sneakers/panda-dunk-low-1.jpg" height="350px" width="470px" alt="">
+    </div>
     <div class="panel">
       <div class="description-container">
         <h2>{{ productDetails.productName }}</h2>

@@ -25,7 +25,11 @@ import { FormsModule } from '@angular/forms';
 import { OverlayComponent } from './widgets/shopping-cart-list/overlay/overlay.component';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { InMemoryCache } from '@apollo/client/core';
-import { HttpLink } from 'apollo-angular/http'; 
+import { HttpLink } from 'apollo-angular/http';
+import { ItemListComponent } from './lib/item-list/item-list.component';
+import { ItemDetailsComponent } from './lib/item-details/item-details.component';
+import { SneakersComponent } from './merch/sneakers/sneakers.component';
+import { ApparelComponent } from './merch/apparel/apparel.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,10 @@ import { HttpLink } from 'apollo-angular/http';
     GetProductPipe,
     ShoppingCartDetailsComponent,
     OverlayComponent,
+    ItemListComponent,
+    ItemDetailsComponent,
+    SneakersComponent,
+    ApparelComponent,
   ],
   imports: [
     CommonModule,
