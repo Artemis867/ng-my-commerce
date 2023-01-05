@@ -33,4 +33,19 @@ query Query($productId: String) {
 }
 `;
 
-export { GET_PRODUCTS, GET_PRODUCT_DETAILS };
+const GET_SNEAKER_LIST = gql`
+  query Query {
+    getSneakerList {
+      _id
+      productName
+      sizes {
+        name
+        stock
+      }
+      description
+      imgSrc
+    }
+  }
+`;
+
+export { GET_PRODUCTS, GET_PRODUCT_DETAILS, GET_SNEAKER_LIST };

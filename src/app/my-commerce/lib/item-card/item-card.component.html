@@ -1,0 +1,12 @@
+<div class="item-card-container">
+  <p class="item-name">{{ itemName }}</p>
+  <div class="img-container">
+  </div>
+  <div class="sizes-container">
+    <span>Available</span>
+    <br/>
+    <span class="size-pill" *ngFor="let size of sizes">
+      {{size}}
+    </span>
+  </div>
+</div>

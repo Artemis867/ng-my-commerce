@@ -1,0 +1,31 @@
+.item-card-container {
+  width: 100%;
+  height: 100%;
+  padding: 15px 5px 5px 5px;
+
+  .item-name {
+    font-size: 16px;
+  }
+
+  .img-container {
+    width: 100%;
+    height: 190px;
+    border: 1px solid #b5b5b5;
+  }
+
+  .sizes-container {
+    margin-top: 5px;
+
+    &>span:first-child {
+      font-size: 15px;
+    }
+
+    .size-pill {
+      border: 1px solid #c4c4c4;
+      margin: 3px;
+      padding: 2px 5px 2px 5px;
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.sneaker-list-container {
+  width: 100%;
+  height:auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .card-container {
+    margin: 0 5px 0 5px;
+    border: 1px solid #cdcdcd;
+    width: 280px;
+    height: 330px;
+  }
+}

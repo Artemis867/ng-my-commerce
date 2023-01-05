@@ -30,6 +30,9 @@ import { ItemListComponent } from './lib/item-list/item-list.component';
 import { ItemDetailsComponent } from './lib/item-details/item-details.component';
 import { SneakersComponent } from './merch/sneakers/sneakers.component';
 import { ApparelComponent } from './merch/apparel/apparel.component';
+import { SneakerListComponent } from './merch/sneakers/sneaker-list/sneaker-list.component';
+import { SneakerDetailsComponent } from './merch/sneakers/sneaker-details/sneaker-details.component';
+import { ItemCardComponent } from './lib/item-card/item-card.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { ApparelComponent } from './merch/apparel/apparel.component';
     ItemDetailsComponent,
     SneakersComponent,
     ApparelComponent,
+    SneakerListComponent,
+    SneakerDetailsComponent,
+    ItemCardComponent,
   ],
   imports: [
     CommonModule,

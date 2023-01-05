@@ -1,0 +1,11 @@
+<div class="sneaker-list-container">
+  <div 
+    class="card-container"
+    *ngFor="let sneaker of sneakerList$ | async">
+    <app-item-card
+      [itemName]="sneaker.productName"
+      [sizes]="sneaker.sizes"
+      [img]="sneaker.imgSrc"
+    ></app-item-card>
+  </div>
+</div>
